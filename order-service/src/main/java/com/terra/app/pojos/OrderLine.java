@@ -6,7 +6,7 @@ import java.util.List;
 import com.terra.app.status.OrderLineStatus;
 
 public class OrderLine {
-	private Item item;
+	private List<Item> listOfItems;
 	private Date eta;
 	private OrderLineStatus orderLineStatus;
 	private List<Address> listOfAddresses;
@@ -19,12 +19,12 @@ public class OrderLine {
 		this.listOfAddresses = listOfAddresses;
 	}
 
-	public Item getItem() {
-		return item;
+	public List<Item> getListOfItems() {
+		return listOfItems;
 	}
 
-	public void setItem(Item item) {
-		this.item = item;
+	public void setListOfItems(List<Item> listOfItems) {
+		this.listOfItems = listOfItems;
 	}
 
 	public Date getEta() {
