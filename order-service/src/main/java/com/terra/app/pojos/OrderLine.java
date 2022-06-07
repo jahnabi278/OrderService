@@ -3,11 +3,20 @@ package com.terra.app.pojos;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.terra.app.status.OrderLineStatus;
 
 public class OrderLine {
 	private List<Item> listOfItems;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd")
+	@Temporal(TemporalType.DATE)
 	private Date eta;
+	@Enumerated(EnumType.STRING)
 	private OrderLineStatus orderLineStatus;
 	private List<Address> listOfAddresses;
 

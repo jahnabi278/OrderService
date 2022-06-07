@@ -1,18 +1,14 @@
 package com.terra.app.pojos;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+
 public class Item {
-	private String itemId;
+	@NotBlank
 	private String itemName;
 	private String quantity;
+	@Min(value = 0, message = "price should not be negative")
 	private float price;
-
-	public String getItemId() {
-		return itemId;
-	}
-
-	public void setItemId(String itemId) {
-		this.itemId = itemId;
-	}
 
 	public String getItemName() {
 		return itemName;

@@ -1,7 +1,12 @@
 package com.terra.app.pojos;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+
 public class Address {
+	@Min(value = 6, message = "pincode should be at least 6 digits")
 	private int pinCode;
+	@NotBlank
 	private String city;
 
 	public int getPinCode() {

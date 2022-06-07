@@ -1,0 +1,240 @@
+{
+	"info": {
+		"_postman_id": "305aad35-e2ea-455e-aa2b-e3bbf7a4f65a",
+		"name": "order-service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9090/api/v1/order/629f4a70b16b474bee7c8066",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"order",
+						"629f4a70b16b474bee7c8066"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "get",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/api/v1/order/629f4a70b16b474bee7c8066",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"v1",
+								"order",
+								"629f4a70b16b474bee7c8066"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 07 Jun 2022 13:02:42 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"errorCode\": 200,\n    \"errorMessage\": \"Retrieve successful\",\n    \"order\": {\n        \"orderId\": \"629f4a70b16b474bee7c8066\",\n        \"totalAmount\": 5000,\n        \"orderDate\": \"2022/06/27\",\n        \"orderStatus\": \"OPEN\",\n        \"listOfOrderLines\": [\n            {\n                \"listOfItems\": [\n                    {\n                        \"itemName\": \"heels\",\n                        \"quantity\": \"20\",\n                        \"price\": 250\n                    }\n                ],\n                \"eta\": \"2022/06/30\",\n                \"orderLineStatus\": \"OPEN\",\n                \"listOfAddresses\": [\n                    {\n                        \"pinCode\": 782137,\n                        \"city\": \"Guwahati\",\n                        \"country\": null\n                    }\n                ]\n            }\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "getByPincode",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9090/api/v1/order/pincode/782137",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"order",
+						"pincode",
+						"782137"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "getByPincode",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/api/v1/order/pincode/782137",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"v1",
+								"order",
+								"pincode",
+								"782137"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 07 Jun 2022 13:18:40 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"errorCode\": 200,\n    \"errorMessage\": \"Retrieve successful\",\n    \"listOfOrders\": [\n        {\n            \"orderId\": \"629f4a70b16b474bee7c8066\",\n            \"totalAmount\": 5000,\n            \"orderDate\": \"2022/06/27\",\n            \"orderStatus\": \"OPEN\",\n            \"listOfOrderLines\": [\n                {\n                    \"listOfItems\": [\n                        {\n                            \"itemName\": \"heels\",\n                            \"quantity\": \"20\",\n                            \"price\": 250\n                        }\n                    ],\n                    \"eta\": \"2022/06/30\",\n                    \"orderLineStatus\": \"OPEN\",\n                    \"listOfAddresses\": [\n                        {\n                            \"pinCode\": 782137,\n                            \"city\": \"Guwahati\",\n                            \"country\": null\n                        }\n                    ]\n                }\n            ]\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"totalAmount\": 5000,\r\n    \"orderDate\": \"2022/06/27\",\r\n    \"orderStatus\": \"OPEN\",\r\n    \"listOfOrderLines\": [\r\n        {\r\n            \"listOfItems\": [\r\n                {\r\n                    \"itemName\": \"heels\",\r\n                    \"quantity\": 20,\r\n                    \"price\": 250.00\r\n                }\r\n            ],\r\n            \"eta\": \"2022/06/30\",\r\n            \"orderLineStatus\": \"OPEN\",\r\n            \"listOfAddresses\": [\r\n                {\r\n                    \"pinCode\": 782137,\r\n                    \"city\": \"Guwahati\"\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/api/v1/order",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"order"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "create",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"totalAmount\": 5000,\r\n    \"orderDate\": \"2022/06/27\",\r\n    \"orderStatus\": \"OPEN\",\r\n    \"listOfOrderLines\": [\r\n        {\r\n            \"listOfItems\": [\r\n                {\r\n                    \"itemName\": \"heels\",\r\n                    \"quantity\": 20,\r\n                    \"price\": 250.00\r\n                }\r\n            ],\r\n            \"eta\": \"2022/06/30\",\r\n            \"orderLineStatus\": \"OPEN\",\r\n            \"listOfAddresses\": [\r\n                {\r\n                    \"pinCode\": 782137,\r\n                    \"city\": \"Guwahati\"\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9090/api/v1/order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"v1",
+								"order"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 07 Jun 2022 12:54:08 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"errorCode\": 200,\n    \"errorMessage\": \"Save successful\"\n}"
+				}
+			]
+		}
+	]
+}
