@@ -1,5 +1,7 @@
 package com.terra.app.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +23,7 @@ public class OrderController {
 	OrderService orderService;
 
 	@PostMapping
-	public Result createStore(@RequestBody Order order) {
+	public Result createStore(@Valid @RequestBody Order order) {
 		return orderService.saveOrder(order);
 	}
 
