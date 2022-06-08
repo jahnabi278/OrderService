@@ -1,0 +1,164 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: http://localhost:9200
+  description: Generated server url
+paths:
+  /api/v1/order:
+    post:
+      tags:
+      - order-controller
+      operationId: createStore
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Result'
+  /api/v1/order/{id}:
+    get:
+      tags:
+      - order-controller
+      operationId: getOrdersByPincode
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OrderResult'
+  /api/v1/order/pincode/{pinCode}:
+    get:
+      tags:
+      - order-controller
+      operationId: getOrdersByPincode_1
+      parameters:
+      - name: pinCode
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OrderCollectionsResult'
+components:
+  schemas:
+    Address:
+      required:
+      - city
+      type: object
+      properties:
+        pinCode:
+          minimum: 6
+          type: integer
+          format: int32
+        city:
+          type: string
+        country:
+          type: string
+    Item:
+      required:
+      - itemName
+      type: object
+      properties:
+        itemName:
+          type: string
+        quantity:
+          type: string
+        price:
+          minimum: 0
+          type: number
+          format: float
+    Order:
+      type: object
+      properties:
+        orderId:
+          type: string
+        totalAmount:
+          minimum: 0
+          type: number
+          format: float
+        orderDate:
+          type: string
+          format: date-time
+        orderStatus:
+          type: string
+          enum:
+          - OPEN
+          - COMPLETED
+          - CANCELLED
+        listOfOrderLines:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderLine'
+    OrderLine:
+      type: object
+      properties:
+        listOfItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
+        eta:
+          type: string
+          format: date-time
+        orderLineStatus:
+          type: string
+          enum:
+          - OPEN
+          - INTRANSIT
+          - DELIVERED
+          - CANCELLED
+        listOfAddresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+    Result:
+      type: object
+      properties:
+        errorCode:
+          type: integer
+          format: int32
+        errorMessage:
+          type: string
+    OrderResult:
+      type: object
+      properties:
+        errorCode:
+          type: integer
+          format: int32
+        errorMessage:
+          type: string
+        order:
+          $ref: '#/components/schemas/Order'
+    OrderCollectionsResult:
+      type: object
+      properties:
+        errorCode:
+          type: integer
+          format: int32
+        errorMessage:
+          type: string
+        listOfOrders:
+          type: array
+          items:
+            $ref: '#/components/schemas/Order'
