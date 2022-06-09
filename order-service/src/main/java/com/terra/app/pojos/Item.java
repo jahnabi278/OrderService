@@ -6,7 +6,7 @@ import javax.validation.constraints.NotBlank;
 public class Item {
 	@NotBlank
 	private String itemName;
-	private String quantity;
+	private int quantity;
 	@Min(value = 0, message = "price should not be negative")
 	private float price;
 
@@ -18,11 +18,11 @@ public class Item {
 		this.itemName = itemName;
 	}
 
-	public String getQuantity() {
+	public int getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(String quantity) {
+	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
 

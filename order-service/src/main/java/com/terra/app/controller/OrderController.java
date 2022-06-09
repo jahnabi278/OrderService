@@ -23,7 +23,7 @@ public class OrderController {
 	OrderService orderService;
 
 	@PostMapping
-	public Result createStore(@Valid @RequestBody Order order) {
+	public Result create(@Valid @RequestBody Order order) {
 		return orderService.saveOrder(order);
 	}
 
@@ -33,7 +33,7 @@ public class OrderController {
 	}
 
 	@GetMapping("/{id}")
-	public OrderResult getOrdersByPincode(@PathVariable String id) {
+	public OrderResult getOrdersById(@PathVariable String id) {
 		return orderService.getOrdersById(id);
 	}
 }
