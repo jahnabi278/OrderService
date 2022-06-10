@@ -1,16 +1,20 @@
 package com.terra.app.controller;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -33,11 +37,12 @@ import com.terra.app.util.ErrorMessages;
 @SpringBootTest
 @AutoConfigureMockMvc
 public class OrderControllerTest {
+	private static Logger logger = LogManager.getLogManager().getLogger(OrderControllerTest.class.getName());
 
 	@Mock
 	OrderService orderService;
 
-	@Mock
+	@InjectMocks
 	OrderController orderController;
 
 	@Mock
@@ -49,20 +54,19 @@ public class OrderControllerTest {
 	@Mock
 	OrderCollectionsResult orderCollectionResult;
 
-//	@Test
-//	public void createOrderTestforNullCheck() {
-//		Order order = createOrder();
-//		Result result = orderController.create(order);
-//		assertNull(result);
-//	}
+	@Test
+	public void createOrderTestforNullCheck() {
+		Order order = createOrder();
+		Result result = orderController.create(order);
+		assertNull(result);
+	}
 
 	@Test
 	public void createOrderTestForNotNullCheck() {
 		Order order = createOrder();
-		OrderService orderService =  Mockito.mock(OrderService.class);
-	    Mockito.when(orderService.saveOrder(order)).thenReturn(new Result(200, ErrorMessages.SAVE_SUCCESSFUL)); 
-		Mockito.when(orderService.saveOrder(order));
+		Mockito.when(orderService.saveOrder(order)).thenReturn(new Result(200, ErrorMessages.SAVE_SUCCESSFUL));
 		Result result = orderController.create(order);
+		Mockito.verify(orderService).saveOrder(order);
 		assertNotNull(result);
 	}
 
@@ -114,33 +118,39 @@ public class OrderControllerTest {
 		try {
 			date = new SimpleDateFormat("yyyy/MM/dd").parse(sDate1);
 		} catch (ParseException e) {
-			// LOGGER
+			logger.log(Level.SEVERE, "Parsing Exception : ", e);
 		}
 		return date;
 	}
 
-//	@Test
-//	public void getOrdersByPincodeTest1() {
-//		OrderCollectionsResult result = orderController.getOrdersByPincode(782137);
-//		assertNull(result);
-//	}
-//
-//	@Test
-//	public void getOrdersByIdTest1() {
-//		OrderResult result = orderController.getOrdersById("629f4a70b16b474bee7c8066");
-//		assertNotNull(result);
-//	}
-//
-//	@Test
-//	public void getOrdersByPincodeTest2() {
-//		OrderCollectionsResult result = orderController.getOrdersByPincode(782137);
-//		assertNull(result);
-//	}
-//
-//	@Test
-//	public void getOrdersByIdTest2() {
-//		OrderResult result = orderController.getOrdersById("629f4a70b16b474bee7c8066");
-//		assertNotNull(result);
-//	}
+	@Test
+	public void getOrdersByPincodeTestForNullCheck() {
+		int pincode = 782137;
+		Mockito.when(orderService.getOrdersByPincode(pincode)).thenReturn(new OrderCollectionsResult());
+		OrderCollectionsResult result = orderController.getOrdersByPincode(782137);
+		Mockito.verify(orderService).getOrdersByPincode(pincode);
+		assertNotNull(result);
+	}
+
+	@Test
+	public void getOrdersByIdTestNotNullCheck() {
+		String id = "629f4a70b16b474bee7c8066";
+		Mockito.when(orderService.getOrdersById(id)).thenReturn(new OrderResult());
+		OrderResult result = orderController.getOrdersById(id);
+		Mockito.verify(orderService).getOrdersById(id);
+		assertNotNull(result);
+	}
+
+	@Test
+	public void getOrdersByPincodeTestNullCheck() {
+		OrderCollectionsResult result = orderController.getOrdersByPincode(782137);
+		assertNull(result);
+	}
+
+	@Test
+	public void getOrdersByIdTestNullCheck() {
+		OrderResult result = orderController.getOrdersById("629f4a70b16b474bee7c8066");
+		assertNull(result);
+	}
 
 }
