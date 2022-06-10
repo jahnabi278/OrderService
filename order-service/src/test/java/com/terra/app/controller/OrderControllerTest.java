@@ -124,7 +124,7 @@ public class OrderControllerTest {
 	}
 
 	@Test
-	public void getOrdersByPincodeTestForNullCheck() {
+	public void getOrdersByPincodeTestForNotNullCheck() {
 		int pincode = 782137;
 		Mockito.when(orderService.getOrdersByPincode(pincode)).thenReturn(new OrderCollectionsResult());
 		OrderCollectionsResult result = orderController.getOrdersByPincode(782137);
