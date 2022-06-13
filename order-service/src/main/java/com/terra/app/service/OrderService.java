@@ -42,7 +42,7 @@ public class OrderService {
 	public OrderResult getOrdersById(String id) {
 		OrderResult orderResult = new OrderResult();
 		Optional<Order> result = orderRepository.findById(id);
-		if (result.get() != null) {
+		if (result.isPresent()) {
 			orderResult.setErrorCode(200);
 			orderResult.setErrorMessage(ErrorMessages.RETRIEVE_SUCCESSFUL);
 			orderResult.setOrder(result.get());
